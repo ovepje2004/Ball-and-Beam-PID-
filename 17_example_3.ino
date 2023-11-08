@@ -63,7 +63,7 @@ void loop()
   dist_ema = EMA_ALPHA*dist_raw + (1-EMA_ALPHA)*dist_ema;
       
   //duty = map(dist_ema, _DIST_MIN, _DIST_MAX, _DUTY_MIN, _DUTY_MAX);
-  duty = (_DUTY_MAX-_DUTY_MIN)*(dist_ema-_DIST_MIN)/_DIST_MIN + _DUTY_MIN;
+  duty = (_DUTY_MAX-_DUTY_MIN)*(dist_ema-_DIST_MIN)/(_DIST_MAX-_DIST_MIN) + _DUTY_MIN;
 
   if(dist_ema <= _DIST_MIN) myservo.writeMicroseconds(_DUTY_MIN);
   else if((dist_ema >= _DIST_MIN) && (dist_ema < _DIST_MAX)) {
